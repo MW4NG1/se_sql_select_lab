@@ -54,8 +54,23 @@ df_short_title = pd.read_sql(
 
 # STEP 8
 # Replace None with your code
-sum_total_price = None
+sum_total_price = pd.read_sql(
+    """
+    SELECT SUM(ROUND(price_each * quantity_ordered)) AS total_amount 
+    FROM orderDetails
+""",
+    conn,
+)
 
 # STEP 9
 # Replace None with your code
-df_day_month_year = None
+df_day_month_year = pd.read_sql(
+    """
+    SELECT order_date, 
+           STRFTIME('%d', order_date) AS day, 
+           STRFTIME('%m', order_date) AS month, 
+           STRFTIME('%Y', order_date) AS year 
+    FROM orders
+""",
+    conn,
+)
