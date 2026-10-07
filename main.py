@@ -22,7 +22,9 @@ df_five_reverse = pd.read_sql(
 
 # STEP 4
 # Replace None with your code
-df_alias = None
+df_alias = pd.read_sql(
+    """SELECT last_name, employee_id AS ID FROM employees""", conn
+)
 
 # STEP 5
 # Replace None with your code
