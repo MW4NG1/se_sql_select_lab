@@ -10,11 +10,15 @@ conn = sqlite3.connect("data.sqlite")
 
 # STEP 2
 # Replace None with your code
-df_first_five = None
+df_first_five = pd.read_sql(
+    """SELECT employee_id, last_name FROM employees""", conn
+)
 
 # STEP 3
 # Replace None with your code
-df_five_reverse = None
+df_five_reverse = pd.read_sql(
+    """SELECT last_name, employee_id FROM employees""", conn
+)
 
 # STEP 4
 # Replace None with your code
