@@ -11,19 +11,19 @@ conn = sqlite3.connect("data.sqlite")
 # STEP 2
 # Replace None with your code
 df_first_five = pd.read_sql(
-    """SELECT EmployeeID, LastName FROM employees""", conn
+    """SELECT employeeNumber, lastName FROM employees""", conn
 )
 
 # STEP 3
 # Replace None with your code
 df_five_reverse = pd.read_sql(
-    """SELECT LastName, EmployeeID FROM employees""", conn
+    """SELECT lastName, employeeNumber FROM employees""", conn
 )
 
 # STEP 4
 # Replace None with your code
 df_alias = pd.read_sql(
-    """SELECT LastName, EmployeeID AS ID FROM employees""", conn
+    """SELECT lastName, employeeNumber AS ID FROM employees""", conn
 )
 
 # STEP 5
@@ -32,7 +32,7 @@ df_executive = pd.read_sql(
     """
     SELECT *, 
     CASE 
-        WHEN Title = 'President' OR Title = 'VP Sales' OR Title = 'VP Marketing' THEN 'Executive'
+        WHEN jobTitle = 'President' OR jobTitle = 'VP Sales' OR jobTitle = 'VP Marketing' THEN 'Executive'
         ELSE 'Not Executive'
     END AS role
     FROM employees
@@ -43,33 +43,33 @@ df_executive = pd.read_sql(
 # STEP 6
 # Replace None with your code
 df_name_length = pd.read_sql(
-    """SELECT LENGTH(LastName) AS name_length FROM employees""", conn
+    """SELECT LENGTH(lastName) AS name_length FROM employees""", conn
 )
 
 # STEP 7
 # Replace None with your code
 df_short_title = pd.read_sql(
-    """SELECT SUBSTR(Title, 1, 2) AS short_title FROM employees""", conn
+    """SELECT SUBSTR(jobTitle, 1, 2) AS short_title FROM employees""", conn
 )
 
 # STEP 8
 # Replace None with your code
 sum_total_price = pd.read_sql(
     """
-    SELECT SUM(ROUND(price_each * quantity_ordered)) AS total_amount 
-    FROM orderDetails
+    SELECT ROUND(priceEach * quantityOrdered) AS total_price 
+    FROM orderdetails
 """,
     conn,
-)
+).sum()
 
 # STEP 9
 # Replace None with your code
 df_day_month_year = pd.read_sql(
     """
-    SELECT order_date, 
-           STRFTIME('%d', order_date) AS day, 
-           STRFTIME('%m', order_date) AS month, 
-           STRFTIME('%Y', order_date) AS year 
+    SELECT orderDate, 
+           STRFTIME('%d', orderDate) AS day, 
+           STRFTIME('%m', orderDate) AS month, 
+           STRFTIME('%Y', orderDate) AS year 
     FROM orders
 """,
     conn,
